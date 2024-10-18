@@ -1,4 +1,5 @@
 from threading import Thread, Lock
+import matplotlib.pyplot as plt
 from pose import Pose
 
 import math
@@ -131,3 +132,33 @@ class Robot:
       string += line + "\n"
 
     return string
+
+  def display_log(self):
+    x = []
+    y = []
+
+    for line in self.log:
+      data = line.split(", ")
+      x.append(float(data[0]))
+      y.append(float(data[1]))
+
+    plt.plot(x, y)
+
+    plt.xlim(-72, 72)
+    plt.ylim(-72, 72)
+
+    plt.xticks(range(-72, 73, 24))
+    plt.yticks(range(-72, 73, 24))
+    plt.grid(True)
+
+    # add x and y axis lines
+    plt.axhline(0, color='black')
+    plt.axvline(0, color='black')
+
+    plt.xlabel('X (in)')
+    plt.ylabel('Y (in)')
+    plt.title('Robot Path')
+
+    plt.gca().set_aspect('equal', adjustable='box')
+
+    plt.savefig('path.png')

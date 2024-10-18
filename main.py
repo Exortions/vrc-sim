@@ -10,10 +10,10 @@ if __name__ == '__main__':
   bot.set_pose(0, 0, math.pi / 2)
   bot.initialize()
 
-  bot.move(127, 127)
+  bot.move(127, 90)
 
   bot.start_logging()
   time.sleep(1)
   bot.stop_logging()
-
-  print(bot.get_log(True))
+  bot.stop()
+  bot.display_log()
