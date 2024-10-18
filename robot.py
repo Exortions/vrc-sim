@@ -71,7 +71,7 @@ class Robot:
   def get_pose(self):
     return self.pose
 
-  def set_pose(self):
+  def set_pose(self, pose):
     self.pose = pose
   
   def set_pose(self, x, y, theta):
@@ -97,7 +97,7 @@ class Robot:
 
     self.mutex.acquire()
 
-  def end_motion():
+  def end_motion(self):
     self.is_running = self.is_queued
     self.is_queued = False
 
