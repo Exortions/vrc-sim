@@ -1,5 +1,6 @@
 from threading import Thread, Lock
 import matplotlib.pyplot as plt
+from pid import PID, Gains
 from pose import Pose
 
 import math
@@ -32,6 +33,9 @@ class Robot:
     self.task_running = False
 
     self.is_logging = False
+
+    self.lateral_pid = PID(Gains(0.0, 6.0, 0.0, 36.0, 0.0))
+    self.angular_pid = PID(Gains(0.0, 4, 0.0, 20.0, 0.0))
 
   def initialize(self):
     # create a loop to run update every 10ms

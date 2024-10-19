@@ -65,6 +65,7 @@ class PID:
     def settled(self) -> bool:
         if self.start_time == 0:
             self.start_time = time.time() * 1000
+            return False
         else:
             if time.time() * 1000 - self.start_time > self.max_time:
                 return True
@@ -73,4 +74,10 @@ class PID:
                     self.large_timer = time.time() * 1000
                 elif time.time() * 1000 - self.large_timer > self.large_time:
                     return True
-        # TODO
+            if abs(self.previous_error) < self.small_error:
+                if self.small_timer == 0:
+                    self.small_timer = time.time() * 1000
+                elif time.time() * 1000 - self.small_timer > self.small_time:
+                    return True
+            
+            return False
